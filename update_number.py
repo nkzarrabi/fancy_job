@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 import os
-import random
 import subprocess
 from datetime import datetime
+import secrets
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(script_dir)
@@ -77,8 +77,8 @@ def git_push():
 
 def update_cron_with_random_time():
     # Generate random hour (0-23) and minute (0-59)
-    random_hour = random.randint(0, 23)
-    random_minute = random.randint(0, 59)
+    random_hour = secrets.SystemRandom().randint(0, 23)
+    random_minute = secrets.SystemRandom().randint(0, 59)
 
     # Define the new cron job command
     new_cron_command = f"{random_minute} {random_hour} * * * cd {script_dir} && python3 {os.path.join(script_dir, 'update_number.py')}\n"
